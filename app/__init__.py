@@ -115,5 +115,9 @@ def direct(f_name, l_name):
 
 def generate_url(f_name, l_name):
     url = 'https://directory.bethel.edu/cgi-bin/sso/dirsso.cgi?'
-    url += 'lname=' + l_name + '&fname=' + f_name + '&filter=Pictures'
+    url += 'lname=' + l_name + '&fname=' + f_name + '&filter=Pictures&filter=Students'
     return url
+
+
+def read_directory():
+    pass
