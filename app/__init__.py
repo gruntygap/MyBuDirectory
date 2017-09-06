@@ -6,6 +6,7 @@ from twill.commands import *
 import urllib2
 import cookielib
 import mechanize
+from config import *
 
 app = Flask(__name__)
 
@@ -56,8 +57,8 @@ def get_cookies():
     browser.set_cookiejar(jar)
     browser.open('https://auth.bethel.edu/cas/login')
     browser.select_form(nr=0)  # check yoursite forms to match the correct number
-    browser['username'] = 'grg27487'  # use the proper input type=text name
-    browser['password'] = 'Kitty100!'  # use the proper input type=password name
+    browser['username'] = user # use the proper input type=text name
+    browser['password'] = password  # use the proper input type=password name
     browser.submit()
     return jar
 
