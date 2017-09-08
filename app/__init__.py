@@ -145,10 +145,12 @@ def parse_directory_html():
                 for cell in table.find_all('tr'):
                     # TODO create a person object with data:
                         # TODO person(first_name, last_name, email, photofile, dorm, PO)
-                    cell.find_next('td')
+                    pos_image = cell.find_next('td')
+                    info_td = cell.find_next('td')
                     # Cell is a person
-                    for td in cell.find_all('td'):
-                        strn += repr(td)
+
+                    # for td in cell.find_all('td'):
+                    #     strn += repr(td)
 
 
         # TODO perhaps search via an itteration of the tables and table elements, identify the tables
