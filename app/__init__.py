@@ -108,16 +108,40 @@ def direct(f_name, l_name):
     browser.set_cookiejar(jar)
     browser.open(generate_url(f_name, l_name))
     browser.select_form(nr=0)
-    response = browser.submit()
     # Returns HTML of Submit Response
+    response = browser.submit()
     return response.read()
 
 
 def generate_url(f_name, l_name):
-    url = 'https://directory.bethel.edu/cgi-bin/sso/dirsso.cgi?'
-    url += 'lname=' + l_name + '&fname=' + f_name + '&filter=Pictures&filter=Students'
-    return url
+    gen_url = 'https://directory.bethel.edu/cgi-bin/sso/dirsso.cgi?'
+    # gen_url += 'lname=' + l_name + '&fname=' + f_name + '&filter=Pictures&filter=Students'
+    gen_url += 'lname=' + l_name + '&fname=' + f_name + '&filter=Pictures'
+    return gen_url
 
 
-def read_directory():
-    pass
+@app.route('/read-gstyle')
+def parse_directory_html():
+    html = direct('*', '*')
+    soup = BeautifulSoup(html, 'html.parser')
+    initial_p = soup.p.string
+    if initial_p == 'Too many entries matched your search; please narrow it down.':
+        # Read print statments
+        print "There is nothing to search here: Too many Entries"
+
+    elif initial_p == 'No entries matched your search.':
+        # Read print statments
+        print "There is nothing to search here: No Entries"
+
+    else:
+        # Read print statments
+        print "duuuuude we searchin"
+
+        for h3 in soup.find_all('h3'):
+            if h3.string == 'Students':
+                pass
+
+        # TODO perhaps search via an itteration of the tables and table elements, identify the tables
+            # with the h3 headers.
+
+    return "Searching..."
