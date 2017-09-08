@@ -125,6 +125,7 @@ def parse_directory_html():
     html = direct('*', '*')
     soup = BeautifulSoup(html, 'html.parser')
     initial_p = soup.p.string
+    strn = ''
     if initial_p == 'Too many entries matched your search; please narrow it down.':
         # Read print statments
         print "There is nothing to search here: Too many Entries"
@@ -139,9 +140,17 @@ def parse_directory_html():
 
         for h3 in soup.find_all('h3'):
             if h3.string == 'Students':
-                pass
+                table = h3.find_next('table')
+                # Searches through Table Rows
+                for cell in table.find_all('tr'):
+                    # TODO create a person object with data:
+                        # TODO person(first_name, last_name, email, photofile, dorm, PO)
+                    cell.find_next('td')
+                    # Cell is a person
+                    for td in cell.find_all('td'):
+                        strn += repr(td)
+
 
         # TODO perhaps search via an itteration of the tables and table elements, identify the tables
             # with the h3 headers.
-
-    return "Searching..."
+    return strn
