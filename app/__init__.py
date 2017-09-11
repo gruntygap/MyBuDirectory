@@ -147,6 +147,7 @@ def parse_directory_html():
                         # TODO person(first_name, last_name, email, photofile, dorm, PO)
                     pos_image = cell.find_next('td')
                     info_td = cell.find_next('td')
+                    photo_link = pos_image.find_next('a')
                     # Cell is a person
 
                     # for td in cell.find_all('td'):
