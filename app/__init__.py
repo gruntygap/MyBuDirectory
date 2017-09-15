@@ -146,10 +146,12 @@ def parse_directory_html():
                     # TODO create a person object with data:
                         # TODO person(first_name, last_name, email, photofile, dorm, PO)
                     pos_image = cell.find_next('td')
-                    info_td = cell.find_next('td')
-                    photo_link = pos_image.find_next('a')
+                    info_td = pos_image.find_next('td')
+                    photo_link = pos_image.find_next('img')
                     # Cell is a person
-
+                    print pos_image
+                    print info_td
+                    print photo_link
                     # for td in cell.find_all('td'):
                     #     strn += repr(td)
 
