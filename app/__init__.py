@@ -153,7 +153,7 @@ def parse_directory_html():
                     info_td = pos_image.find_next('td')
 
                     # Cell is a person input info
-                    print "-*" * 25, "INPUT DATA", "-*" * 25
+                    print "*-" * 25, "INPUT DATA", "-*" * 25
                     print "General info: %s" % info_td
                     print "Photo link: %s" % photo_link
                     print ""
