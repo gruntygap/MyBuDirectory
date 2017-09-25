@@ -151,10 +151,24 @@ def parse_directory_html():
                     photo_link = pos_image.find('img')
                     # Takes the second <td> cell which holds Name, Email, Dorm, PO
                     info_td = pos_image.find_next('td')
+                    info_name = info_td.find_next('b').get_text()
+                    pos_email = info_td.find('a')
+
+                    # if there is an email that is not equal to none
+                    # then set the email var
+                    if(pos_email != None):
+                        info_email = pos_email.get_text()
+                    else:
+                        info_email = None
+
+                    extra_info = info_td.find("br")
 
                     # Cell is a person input info
                     print "*-" * 25, "INPUT DATA", "-*" * 25
                     print "General info: %s" % info_td
+                    print "Name:", info_name
+                    print "E-Mail:", info_email
+                    print "Extra Info?:", extra_info
                     print "Photo link: %s" % photo_link
                     print ""
 
