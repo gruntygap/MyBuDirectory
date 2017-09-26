@@ -1,3 +1,7 @@
 Flask
 Mechanize
 requests
+bs4
+twill
+lxml
+cssselect
