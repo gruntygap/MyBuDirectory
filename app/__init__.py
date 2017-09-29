@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from bs4 import BeautifulSoup
 import requests
 from requests import cookies
@@ -15,11 +15,12 @@ app = Flask(__name__)
 # https://auth.bethel.edu/cas/login
 @app.route('/')
 def hello_world():
-    strin = "<h1> This is the Home Landing Page </h1>"
-    strin += "<p>Here are some links:</p>"
-    strin += '<p><a href="/get-cookies-view">You Best Be Getting Some Cookies</a></p>'
-    strin += '<p><a href="/direct/*/*">Search the Directory via pub BackDoor</a></p>'
-    return strin
+    # strin = "<h1> This is the Home Landing Page </h1>"
+    # strin += "<p>Here are some links:</p>"
+    # strin += '<p><a href="/get-cookies-view">You Best Be Getting Some Cookies</a></p>'
+    # strin += '<p><a href="/direct/*/*">Search the Directory via pub BackDoor</a></p>'
+    # return strin
+    return render_template('index.html')
 
 
 @app.route('/memes')
