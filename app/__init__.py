@@ -17,8 +17,8 @@ app = Flask(__name__)
 def hello_world():
     strin = "<h1> This is the Home Landing Page </h1>"
     strin += "<p>Here are some links:</p>"
-    strin += '<a href="/get-cookies-view">get some cookies yo</a>'
-    strin += '<a href="/direct/*/*">Search the directory through secret means</a>'
+    strin += '<p><a href="/get-cookies-view">You Best Be Getting Some Cookies</a></p>'
+    strin += '<p><a href="/direct/*/*">Search the Directory via pub BackDoor</a></p>'
     return strin
 
 
