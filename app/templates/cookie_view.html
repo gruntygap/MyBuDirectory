@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+        }
+    </style>
+    <h3> Welcome to the Cookies </h3>
+    <table>
+        {% for cookie in jar %}
+            <tr>
+                <th>
+                    {{ cookie.name }}
+                </th>
+                <th>
+                    {{ cookie.value }}
+                </th>
+                <th>
+                    {{ cookie.domain }}
+                </th>
+                <th>
+                    {{ cookie.path }}
+                </th>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

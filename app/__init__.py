@@ -66,36 +66,13 @@ def get_cookies():
 @app.route('/get-cookies-view')
 def get_cookies_view():
     jar = get_cookies()
-    string = """
-    <style>
-        table, th, td {
-            border: 1px solid black;    
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 15px;
-        }
-    </style>
-    """
-    string += 'Output: <i>Currently have %d cookies</i>' % len(jar)
-    string += '<table>'
-    for cookie in jar:
-        string += '<tr>'
-        string += '<th>'
-        string += cookie.name
-        string += '</th>'
-        string += '<th>'
-        string += cookie.value
-        string += '</th>'
-        string += '<th>'
-        string += cookie.domain
-        string += '</th>'
-        string += '<th>'
-        string += cookie.path
-        string += '</th>'
-        string += '</tr>'
-    string += '</table>'
-    return string
+    # How one would access them via python
+    # for cookie in jar:
+    #     cookie.name
+    #     cookie.value
+    #     cookie.domain
+    #     cookie.path
+    return render_template('cookie_view.html', **locals())
 
 
 @app.route('/direct/<f_name>/<l_name>')
