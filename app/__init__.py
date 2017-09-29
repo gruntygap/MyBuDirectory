@@ -19,6 +19,7 @@ def hello_world():
     strin += "<p>Here are some links:</p>"
     strin += '<p><a href="/get-cookies-view">You Best Be Getting Some Cookies</a></p>'
     strin += '<p><a href="/direct/*/*">Search the Directory via pub BackDoor</a></p>'
+    strin += '<p><i>TODO: Add a database file, using SQLite3 for python</i></p>'
     return strin
 
 
