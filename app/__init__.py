@@ -15,7 +15,11 @@ app = Flask(__name__)
 # https://auth.bethel.edu/cas/login
 @app.route('/')
 def hello_world():
-    return 'Long Ding Dong'
+    strin = "<h1> This is the Home Landing Page </h1>"
+    strin += "<p>Here are some links:</p>"
+    strin += "<a href="/get-cookeis-view">get some cookies yo</a>"
+    strin += "<p>Here are some links:</p>"
+    return strin
 
 
 @app.route('/memes')
