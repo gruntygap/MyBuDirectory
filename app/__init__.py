@@ -15,7 +15,7 @@ app = Flask(__name__)
 # https://auth.bethel.edu/cas/login
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return 'Long Ding Dong'
 
 
 @app.route('/memes')
