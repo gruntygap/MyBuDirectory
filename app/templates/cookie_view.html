@@ -5,27 +5,41 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
+
         th, td {
             padding: 15px;
         }
     </style>
     <h3> Welcome to the Cookies </h3>
-    <table>
-        {% for cookie in jar %}
+    <div class="table-responsive">
+        <table class="table-striped">
+            <thead>
             <tr>
-                <th>
-                    {{ cookie.name }}
-                </th>
-                <th>
-                    {{ cookie.value }}
-                </th>
-                <th>
-                    {{ cookie.domain }}
-                </th>
-                <th>
-                    {{ cookie.path }}
-                </th>
+                <th><b>Name</b></th>
+                <th><b>Value</b></th>
+                <th><b>Domain</b></th>
+                <th><b>Path</b></th>
+
             </tr>
-        {% endfor %}
-    </table>
+            </thead>
+            <tbody>
+            {% for cookie in jar %}
+                <tr>
+                    <th>
+                        {{ cookie.name }}
+                    </th>
+                    <th>
+                        {{ cookie.value }}
+                    </th>
+                    <th>
+                        {{ cookie.domain }}
+                    </th>
+                    <th>
+                        {{ cookie.path }}
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
