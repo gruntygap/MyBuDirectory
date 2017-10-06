@@ -17,7 +17,7 @@ from direct import direct
 # https://auth.bethel.edu/cas/login
 @app.route('/')
 def hello_world():
-    return render_template('base2.html')
+    return render_template('index.html')
 
 
 @app.route('/read-gstyle')
