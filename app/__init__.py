@@ -20,9 +20,9 @@ def hello_world():
     return render_template('index.html')
 
 
-@app.route('/read-gstyle')
-def parse_directory_html():
-    html = direct('*', '*')
+@app.route('/read-gstyle/<f_name>/<l_name>')
+def parse_directory_html(f_name,l_name):
+    html = direct(f_name, l_name)
     soup = BeautifulSoup(html, 'html.parser')
     initial_p = soup.p.string
     strn = ''
@@ -49,6 +49,14 @@ def parse_directory_html():
                     pos_image = cell.find_next('td')
                     # if there is a photo link within pos_image, the <img> tag is stored.
                     photo_link = pos_image.find('img')
+
+                    # gets the actual photo link, not the <img> tag
+                    if photo_link is None:
+                        # Do nothing
+                        photo_link = "None"
+                    else:
+                        photo_link = photo_link['src']
+
                     # Takes the second <td> cell which holds Name, Email, Dorm, PO
                     info_td = pos_image.find_next('td')
                     info_name = info_td.find_next('b').get_text()
@@ -61,8 +69,9 @@ def parse_directory_html():
                     else:
                         info_email = None
 
-                    extra_info = info_td.find("br")
+                    extra_info = info_td.next_sibiling
 
+                    # Returning Data #
                     # Cell is a person input info
                     print "*-" * 25, "INPUT DATA", "-*" * 25
                     print "General info: %s" % info_td
@@ -71,6 +80,11 @@ def parse_directory_html():
                     print "Extra Info?:", extra_info
                     print "Photo link: %s" % photo_link
                     print ""
-        # TODO perhaps search via an itteration of the tables and table elements, identify the tables
-            # with the h3 headers.
+
+                    strn += "<h3> INPUT DATA </h3>"
+                    strn += "<p>General info: %s </p>" % info_td
+                    strn += "<p>Name: %s </p>" % info_name
+                    strn += "<p>E-Mail: %s </p>" % info_email
+                    strn += "<p>Extra Info: %s </p>" % extra_info
+                    strn += "<p>Photo Link: %s </p>" % photo_link
     return strn
