@@ -29,10 +29,12 @@ def parse_directory_html(f_name,l_name):
     if initial_p == 'Too many entries matched your search; please narrow it down.':
         # Read print statments
         print "There is nothing to search here: Too many Entries"
+        strn += "There is nothing to search here: Too many Entries"
 
     elif initial_p == 'No entries matched your search.':
         # Read print statments
         print "There is nothing to search here: No Entries"
+        strn += "There is nothing to search here: No Entries"
 
     else:
         # Read print statments
@@ -87,4 +89,4 @@ def parse_directory_html(f_name,l_name):
                     strn += "<p>E-Mail: %s </p>" % info_email
                     strn += "<p>Extra Info: %s </p>" % extra_info
                     strn += "<p>Photo Link: %s </p>" % photo_link
-    return strn
+    return render_template('direct.html', strn=strn)
