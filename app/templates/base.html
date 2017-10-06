@@ -36,10 +36,11 @@
                     <a class="nav-link" href="/read-gstyle/*/*">Direct</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="F-Name">
-                <input class="form-control mr-sm-2" type="text" placeholder="L-Name">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline my-2 my-lg-0" id="mainForm">
+                <input class="form-control mr-sm-2" id="fname" type="text" placeholder="F-Name">
+                <input class="form-control mr-sm-2" id="lname" type="text" placeholder="L-Name">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="sub" type="submit" onclick="submitDirectoryRequest()">Search
+                </button>
             </form>
         </div>
     </nav>
@@ -71,6 +72,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
-
+<script>
+    function submitDirectoryRequest() {
+        var lname = document.getElementById("lname");
+        var fname = document.getElementById("fname");
+        var url = "/read-gstyle/" + fname.value + "/" + lname.value;
+        var theDirectorySubmissionForm = document.getElementById("mainForm");
+        theDirectorySubmissionForm.setAttribute("action", url);
+        theDirectorySubmissionForm.submit();
+    }
+</script>
 </body>
 </html>
