@@ -2,6 +2,9 @@
 {% block cards %}
 {{ strn | safe }}
     {% for pein in people %}
+        <div class="card">
+            <img src="{{ pein.get_photo_link() }}" />
         <p>{{ pein.get_name() }}</p>
+        </div>
     {% endfor %}
 {% endblock %}

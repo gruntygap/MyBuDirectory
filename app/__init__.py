@@ -89,18 +89,13 @@ def parse_directory_html(f_name, l_name):
 
                     # Returning Data #
                     # Cell is a person input info
-                    print "*-" * 25, "INPUT DATA", "-*" * 25
-                    print "General info: %s" % info_td
-                    print "Name:", info_name
-                    print "E-Mail:", info_email
-                    print "Photo link: %s" % photo_link
-                    print ""
+                    # print "*-" * 25, "INPUT DATA", "-*" * 25
+                    # print "General info: %s" % info_td
+                    # print "Name:", info_name
+                    # print "E-Mail:", info_email
+                    # print "Photo link: %s" % photo_link
+                    # print ""
                     person = Person(info_name, info_email, photo_link, info_po, info_place)
+                    # add person to the array
                     people.append(person)
-                    strn += "< h3> INPUT DATA </h3>"
-                    strn += "<p>Name: %s </p>" % info_name
-                    strn += "<p>E-Mail: %s </p>" % info_email
-                    strn += '<p>Photo Link:<a href="%s">Here</a></p>' % photo_link
-                    strn += '<p>PO #: %s</p>' % info_po
-                    strn += '<p>Location: %s</p>' % info_place
     return render_template('cards.html', people=people, strn=strn)
