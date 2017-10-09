@@ -21,7 +21,7 @@
                         </div>
                         <h5 class="card-title">{{ person.get_name() }}</h5>
                         <div class="card-text">
-                            <p>Email: <a href="{{ person.get_email() }}">{{ person.get_email() }}</a></p>
+                            <p>Email: <a href="mailto:{{ person.get_email() }}">{{ person.get_email() }}</a></p>
                             <p>PO#: {{ person.get_po_num() }}</p>
                             <p>Place of Residence: {{ person.get_place() }}</p>
                         </div>
