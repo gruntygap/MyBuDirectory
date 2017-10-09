@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from bs4 import BeautifulSoup
+from Person import *
 import mechanize
 
 # not being used
@@ -27,6 +28,7 @@ def parse_directory_html(f_name, l_name):
     soup = BeautifulSoup(html, 'html.parser')
     initial_p = soup.p.string
     strn = ''
+    people = []
     if initial_p == 'Too many entries matched your search; please narrow it down.':
         # Read print statments
         print "Too many Entries"
@@ -38,6 +40,7 @@ def parse_directory_html(f_name, l_name):
         strn += '<div class="alert alert-danger" role="alert"><strong>There is nothing to search here:</strong>NO Entries</div>'
 
     else:
+        # Creates an Array of people
         print "performed search on: %s, %s" % (f_name, l_name)
         for h3 in soup.find_all('h3'):
             if h3.string == 'Students':
@@ -92,11 +95,12 @@ def parse_directory_html(f_name, l_name):
                     print "E-Mail:", info_email
                     print "Photo link: %s" % photo_link
                     print ""
-
-                    strn += "<h3> INPUT DATA </h3>"
+                    person = Person(info_name, info_email, photo_link, info_po, info_place)
+                    people.append(person)
+                    strn += "< h3> INPUT DATA </h3>"
                     strn += "<p>Name: %s </p>" % info_name
                     strn += "<p>E-Mail: %s </p>" % info_email
                     strn += '<p>Photo Link:<a href="%s">Here</a></p>' % photo_link
                     strn += '<p>PO #: %s</p>' % info_po
                     strn += '<p>Location: %s</p>' % info_place
-    return render_template('direct.html', strn=strn)
+    return render_template('cards.html', people=people, strn=strn)

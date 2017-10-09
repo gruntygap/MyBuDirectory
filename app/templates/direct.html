@@ -12,7 +12,9 @@
             </form>
         </div>
     </div>
+    {% block cards %}
     {{ strn | safe }}
+    {% endblock %}
     <script>
         function submitDirectoryRequest() {
             var lname = document.getElementById("lname");

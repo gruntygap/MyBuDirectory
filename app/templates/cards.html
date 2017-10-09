@@ -1,0 +1,7 @@
+{% extends "direct.html" %}
+{% block cards %}
+{{ strn | safe }}
+    {% for pein in people %}
+        <p>{{ pein.get_name() }}</p>
+    {% endfor %}
+{% endblock %}
