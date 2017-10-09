@@ -34,7 +34,7 @@
             if (fname.length < 1) {
                 fname.value = "*";
             }
-            var url = "/read-gstyle/" + fname.value + "/" + lname.value;
+            var url = "/direct/" + fname.value + "/" + lname.value;
             var theDirectorySubmissionForm = document.getElementById("mainForm");
             theDirectorySubmissionForm.setAttribute("action", url);
             theDirectorySubmissionForm.submit();
