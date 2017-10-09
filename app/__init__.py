@@ -63,9 +63,9 @@ def parse_directory_html(f_name, l_name):
 
                     # Takes the second <td> cell which holds Name, Email, Dorm, PO
                     info_td = pos_image.find_next('td')
+                    info_name = info_td.find_next('b').get_text()
                     # Removes the Name
                     info_td.b.decompose()
-                    info_name = info_td.find_next('b').get_text()
                     pos_email = info_td.find('a')
 
                     # if there is an email that is not equal to none
