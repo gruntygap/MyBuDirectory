@@ -1,4 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="card">
+        <h4 class="card-header">Search: 🕵</h4>
+        <div class="card-block">
+            <form class="form-inline my-2 my-lg-0" id="mainForm">
+                <input class="form-control mr-sm-2" id="fname" type="text" placeholder="F-Name">
+                <input class="form-control mr-sm-2" id="lname" type="text" placeholder="L-Name">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="sub" type="submit"
+                        onclick="submitDirectoryRequest()"> Search 🔎
+                </button>
+            </form>
+        </div>
+    </div>
     {{ strn | safe }}
+    <script>
+        function submitDirectoryRequest() {
+            var lname = document.getElementById("lname");
+            var fname = document.getElementById("fname");
+            if (lname.length < 1) {
+                lname.value = "*";
+            }
+            if (fname.length < 1) {
+                fname.value = "*";
+            }
+            var url = "/read-gstyle/" + fname.value + "/" + lname.value;
+            var theDirectorySubmissionForm = document.getElementById("mainForm");
+            theDirectorySubmissionForm.setAttribute("action", url);
+            theDirectorySubmissionForm.submit();
+        }
+    </script>
 {% endblock %}

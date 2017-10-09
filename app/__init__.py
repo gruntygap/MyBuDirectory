@@ -28,13 +28,13 @@ def parse_directory_html(f_name,l_name):
     strn = ''
     if initial_p == 'Too many entries matched your search; please narrow it down.':
         # Read print statments
-        print "There is nothing to search here: Too many Entries"
-        strn += "There is nothing to search here: Too many Entries"
+        print "Too many Entries"
+        strn += '<div class="alert alert-danger" role="alert"><strong>There is nothing to search here:</strong>Too many Entries</div>'
 
     elif initial_p == 'No entries matched your search.':
         # Read print statments
         print "There is nothing to search here: No Entries"
-        strn += "There is nothing to search here: No Entries"
+        strn += '<div class="alert alert-danger" role="alert"><strong>There is nothing to search here:</strong>NO Entries</div>'
 
     else:
         # Read print statments

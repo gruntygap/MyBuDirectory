@@ -1,6 +1,11 @@
+from flask import render_template
 import mechanize
 from app import app
 from cookie import create_cookies
+
+@app.route('/direct')
+def main_direct():
+    return render_template('direct.html')
 
 @app.route('/direct/<f_name>/<l_name>')
 def direct(f_name, l_name):
