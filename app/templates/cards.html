@@ -1,0 +1,33 @@
+{% extends "direct.html" %}
+{% block cards %}
+    <style>
+        .content {
+            padding: 1rem 0 1rem 0;
+        }
+
+        #stuff {
+            padding: 0.75rem;
+        }
+    </style>
+    {{ strn | safe }}
+    <div class="content">
+        <div class="card-columns">
+            {% for person in people %}
+                <div class="card" id="stuff">
+                    <div class="card-block">
+                        <div class="image">
+                            <img class="img img-thumbnail img-fluid" style="max-height: 100px"
+                                 src="{{ person.get_photo_link() }}"/>
+                        </div>
+                        <h5 class="card-title">{{ person.get_name() }}</h5>
+                        <div class="card-text">
+                            <p>Email: <a href="{{ person.get_email() }}">{{ person.get_email() }}</a></p>
+                            <p>PO#: {{ person.get_po_num() }}</p>
+                            <p>Place of Residence: {{ person.get_place() }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
