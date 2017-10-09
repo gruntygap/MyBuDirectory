@@ -98,4 +98,5 @@ def parse_directory_html(f_name, l_name):
                     person = Person(info_name, info_email, photo_link, info_po, info_place)
                     # add person to the array
                     people.append(person)
-    return render_template('cards.html', people=people, strn=strn)
+    found = people.__len__()
+    return render_template('cards.html', people=people, strn=strn, found=found)
