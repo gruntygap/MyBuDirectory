@@ -84,7 +84,7 @@ def parse_directory_html(f_name, l_name):
                         # Pulls the PO number out
                         if 'PO# ' in child:
                             info_po = int(child.replace('PO# ', ''))
-                        if 'hall' in child or 'St.' in child or 'Arden' in child or 'Apartments' in child or 'San' in child:
+                        if 'Hall' in child or 'St.' in child or 'Arden' in child or 'Apartments' in child or 'San' in child:
                             info_place = child
 
                     # Returning Data #
