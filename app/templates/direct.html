@@ -2,7 +2,7 @@
 {% block content %}
     <div class="card">
         <h4 class="card-header">Search: 🕵</h4>
-        <div class="card-block">
+        <div class="card-block" style="padding: .5rem;">
             <form class="form-inline my-2 my-lg-0" id="mainForm">
                 <input class="form-control mr-sm-2" id="fname" type="text" placeholder="F-Name">
                 <input class="form-control mr-sm-2" id="lname" type="text" placeholder="L-Name">
@@ -10,6 +10,15 @@
                         onclick="submitDirectoryRequest()"> Search 🔎
                 </button>
             </form>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center; margin: 1rem 0 1rem 0;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>
+                Directions
+            </strong>
+            You must input text for the First and Last name, or your request will not go through!
+        </div>
         </div>
     </div>
     {% block cards %}
