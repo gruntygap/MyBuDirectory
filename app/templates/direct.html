@@ -10,19 +10,20 @@
                         onclick="submitDirectoryRequest()"> Search 🔎
                 </button>
             </form>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center; margin: 1rem 0 1rem 0;">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>
-                Directions
-            </strong>
-            You must input text for the First and Last name, or your request will not go through!
-        </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                 style="text-align: center; margin: 1rem 0 1rem 0;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>
+                    Directions
+                </strong>
+                You must input text for the First and Last name, or your request will not go through!
+            </div>
         </div>
     </div>
     {% block cards %}
-    {{ strn | safe }}
+        {{ strn | safe }}
     {% endblock %}
     <script>
         function submitDirectoryRequest() {
@@ -34,7 +35,7 @@
             if (fname.length < 1) {
                 fname.value = "*";
             }
-            var url = "/read-gstyle/" + fname.value + "/" + lname.value;
+            var url = "/direct/" + fname.value + "/" + lname.value;
             var theDirectorySubmissionForm = document.getElementById("mainForm");
             theDirectorySubmissionForm.setAttribute("action", url);
             theDirectorySubmissionForm.submit();

@@ -1,4 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>Help Me</p>
+    <h2>Contact the Developer: </h2>
+    <div class="card">
+        <div class="card-body">
+            <form id="mainForm" data-toggle="validator" role="form" action="/help" method="POST">
+                <div class="form-group">
+                    <label for="drop">Reason for Message:</label>
+                    <select class="form-control" name="type" id="drop" required>
+                        <option value="">Select ... </option>
+                        <option value="Bug">Bug</option>
+                        <option value="Suggestion">Suggestion</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label for="name">Full Name: </label>
+                    <input type="text" class="form-control" id="name" aria-describedby="fullName"
+                           placeholder="Enter Name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail">Email address</label>
+                    <input type="email" class="form-control" id="InputEmail" aria-describedby="email"
+                           placeholder="Enter email" name="email" required>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="input">Message</label>
+                    <input type="text" class="form-control" id="input" aria-describedby="message"
+                           placeholder="Input message here... " name="message" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitForm">Send</button>
+            </form>
+        </div>
+        {% if sent == True %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 style="text-align: center; margin: 1rem">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>
+                    Sent Message!
+                </strong>
+            </div>
+        {% endif %}
+    </div>
+    <h2>Documentation:</h2>
+    <p>Currently there is no documentation to view</p>
+
 {% endblock %}
