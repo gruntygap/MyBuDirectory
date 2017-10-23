@@ -33,7 +33,8 @@ def generate_url(f_name, l_name):
     return gen_url
 
 
-@app.route('/direct/<f_name>/<l_name>')
+# The link for scraping is: https://directory.bethel.edu/cgi-bin/sso/dirsso.cgi?lname=*&fname=*
+# https://auth.bethel.edu/cas/login@app.route('/direct/<f_name>/<l_name>')
 def parse_directory_html(f_name, l_name):
     html = direct(f_name, l_name)
     soup = BeautifulSoup(html, 'html.parser')
