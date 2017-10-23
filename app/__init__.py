@@ -17,3 +17,17 @@ from direct import direct
 @app.route('/')
 def hello_world():
     return render_template('index.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+
+@app.route('/comments')
+def comments():
+    return render_template('comments.html')
+
+
+@app.route('/login')
+def comments():
+    return render_template('login.html')
