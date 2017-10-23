@@ -32,9 +32,9 @@ def generate_url(f_name, l_name):
     gen_url += 'lname=' + l_name + '&fname=' + f_name + '&filter=Pictures'
     return gen_url
 
-
 # The link for scraping is: https://directory.bethel.edu/cgi-bin/sso/dirsso.cgi?lname=*&fname=*
-# https://auth.bethel.edu/cas/login@app.route('/direct/<f_name>/<l_name>')
+# https://auth.bethel.edu/cas/login
+@app.route('/direct/<f_name>/<l_name>')
 def parse_directory_html(f_name, l_name):
     html = direct(f_name, l_name)
     soup = BeautifulSoup(html, 'html.parser')
@@ -44,12 +44,12 @@ def parse_directory_html(f_name, l_name):
     if initial_p == 'Too many entries matched your search; please narrow it down.':
         # Read print statments
         print "Too many Entries"
-        strn += '<div class="alert alert-danger" role="alert"><strong>There is nothing to search here:</strong>Too many Entries</div>'
+        strn += '<div class="alert alert-danger" role="alert"><strong>There is nothing to search here:</strong> Too many Entries</div>'
 
     elif initial_p == 'No entries matched your search.':
         # Read print statments
         print "There is nothing to search here: No Entries"
-        strn += '<div class="alert alert-danger" role="alert"><strong>There is nothing to search here:</strong>NO Entries</div>'
+        strn += '<div class="alert alert-danger" role="alert"><strong>There is nothing to search here:</strong> NO Entries</div>'
 
     else:
         # Creates an Array of people
