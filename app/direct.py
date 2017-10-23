@@ -115,6 +115,7 @@ def parse_directory_html(f_name, l_name):
 
 
 @app.route('/find-all')
+def find_all():
     letters = list(string.ascii_lowercase)
 
     letters.extend([i + b for i in letters for b in letters])
