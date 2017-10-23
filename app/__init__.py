@@ -22,6 +22,21 @@ def hello_world():
     return render_template('index.html')
 
 
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+
+@app.route('/comments')
+def comments():
+    return render_template('comments.html')
+
+
+@app.route('/login')
+def comments():
+    return render_template('login.html')
+
+
 @app.route('/read-gstyle/<f_name>/<l_name>')
 def parse_directory_html(f_name, l_name):
     html = direct(f_name, l_name)
@@ -47,8 +62,6 @@ def parse_directory_html(f_name, l_name):
                 table = h3.find_next('table')
                 # Searches through Table Rows
                 for cell in table.find_all('tr'):
-                    # TODO create a person object with data:
-                    # TODO person(first_name, last_name, email, photofile, dorm, PO)
                     # Taking the initial <td> cell, which possibly contains a <img tag>
                     pos_image = cell.find_next('td')
                     # if there is a photo link within pos_image, the <img> tag is stored.
