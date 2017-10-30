@@ -17,22 +17,29 @@ def delete_comment():
     pass
 
 
-# Create Comment Object
+# Comment Object
 class Comment:
 
-    def __init__(self, name, post, time_stamp):
+    def __init__(self, name, content, time_stamp):
         self.name = name
-        self.post = post
-        self.time_stamp = time_stamp
-        self.identifier = None
-        
-    def get_post(self):
-        return self.post
+        self.content = content
+        self.time_stamp = self.set_time_stamp()
+        self.identifier = self.set_identifier()
+
+    def get_content(self):
+        return self.content
 
     def get_name(self):
         return self.name
 
     def set_identifier(self):
-        #Generates identifier
+        # Generates identifier
 
         self.identifier = 124
+
+        return 1
+
+    def set_time_stamp(self):
+
+        self.name = 5
+        return 1
