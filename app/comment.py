@@ -45,9 +45,15 @@ def upload_comment(comment):
     # Saves
     conn.commit()
 
-
+@app.route('/comments/delete/<identifier>')
 def delete_comment(identifier):
-    pass
+    conn = sqlite3.connect(config.database_path)
+    try:
+        conn.cursor().execute("DELETE FROM comments WHERE id=?", (identifier,))
+        conn.commit()
+        return "Deleted: %s" % identifier
+    except Error as e:
+        return "Could not delete %s" % e
 
 
 # Comment Object
