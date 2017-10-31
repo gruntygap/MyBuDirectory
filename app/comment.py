@@ -1,5 +1,7 @@
 from flask import render_template
 from app import app
+import datetime
+import uuid
 
 
 @app.route('/comments')
@@ -10,7 +12,24 @@ def comments():
 
 @app.route('/comments/new')
 def new_comment():
+    create_comment("dick", "dicks")
     return render_template('newCommentForm.html')
+
+
+def create_comment(author, content):
+    comment = Comment(author, content)
+    print comment.identifier
+    upload_comment(comment)
+    pass
+
+
+def upload_comment(comment):
+    author = comment.author
+    content = comment.content
+    time_stamp = comment.time_stamp
+    id = comment.identifier
+
+    pass
 
 
 def delete_comment():
@@ -20,8 +39,8 @@ def delete_comment():
 # Comment Object
 class Comment:
 
-    def __init__(self, name, content, time_stamp):
-        self.name = name
+    def __init__(self, author, content):
+        self.author = author
         self.content = content
         self.time_stamp = self.set_time_stamp()
         self.identifier = self.set_identifier()
@@ -29,17 +48,19 @@ class Comment:
     def get_content(self):
         return self.content
 
-    def get_name(self):
-        return self.name
+    def get_author(self):
+        return self.author
 
-    def set_identifier(self):
-        # Generates identifier
+    @staticmethod
+    def set_time_stamp():
+        # creates time stamp of creation of the comment
+        time = datetime.datetime.now().isoformat()
+        return time
 
-        self.identifier = 124
-
-        return 1
-
-    def set_time_stamp(self):
-
-        self.name = 5
-        return 1
+    @staticmethod
+    def set_identifier():
+        # Generates identifier - takes the first 8 characters
+        # TODO May create collisions, when that happens, will have to replace method
+        # http://hashids.org/python/
+        identifier = str(uuid.uuid4())[:8]
+        return identifier
