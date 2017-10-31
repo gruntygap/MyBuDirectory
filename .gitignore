@@ -7,3 +7,7 @@ config.py
 
 
 *.pyc
+
+*.db-journal
+
+*.db

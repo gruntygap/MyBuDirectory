@@ -1,7 +1,10 @@
 from flask import render_template
 from app import app
+import config
 import datetime
 import uuid
+import sqlite3
+from sqlite3 import Error
 
 
 @app.route('/comments')
@@ -13,6 +16,7 @@ def comments():
 @app.route('/comments/new')
 def new_comment():
     create_comment("dick", "dicks")
+
     return render_template('newCommentForm.html')
 
 
@@ -20,19 +24,29 @@ def create_comment(author, content):
     comment = Comment(author, content)
     print comment.identifier
     upload_comment(comment)
-    pass
 
 
 def upload_comment(comment):
-    author = comment.author
-    content = comment.content
-    time_stamp = comment.time_stamp
-    id = comment.identifier
+    # Adds new
+    conn = sqlite3.connect(config.database_path)
+    c = conn.cursor()
 
-    pass
+    # Create table
+    try:
+        c.execute('''CREATE TABLE comments
+                         (id TEXT, author TEXT, content TEXT, time_stamp TEXT)''')
+    except Error:
+        # Do nothing in particular
+        print "Will not re-create"
+
+    data = [(comment.identifier, comment.author, comment.content, comment.time_stamp)]
+    # Insert a row of data
+    c.executemany("INSERT INTO comments VALUES (?,?,?,?)", data)
+    # Saves
+    conn.commit()
 
 
-def delete_comment():
+def delete_comment(identifier):
     pass
 
 
