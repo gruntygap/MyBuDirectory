@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+    <style>
+    body{
+        background-color: #b6c5e3;
+    }
+    </style>
     <h2><strong>BULLET</strong>IN</h2>
     <h5>~ Shoot off random messages with ease ~</h5>
 
@@ -37,8 +42,15 @@
             </div>
         </div>
     </div>
-    {% for foo in comments %}
-        <p>{{ foo.content }}</p>
+    {% for comment in comments %}
+        <div class="card" style="width: 30rem;">
+            <div class="card-block">
+                <div class="card-body">
+                    <p class="card-text">"{{ comment.content }}"</p>
+                    <p class="card-text"><strong>@{{ comment.author }}</strong></p>
+                </div>
+            </div>
+        </div>
     {% endfor %}
     <div class="alert alert-danger" role="alert" style="text-align: center;"><strong>In Progress Web Tool </strong> We
         are basing this section off of other online anon comment sections. (AskFM, Sarahah, etc.)
