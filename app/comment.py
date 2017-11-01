@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 from app import app
 import config
 import datetime
@@ -14,11 +14,11 @@ def start_comments():
     return render_template('comments.html', comments=comments)
 
 
-@app.route('/comments/new')
+@app.route('/comments/new', methods=['POST'])
 def new_comment():
-    create_comment("dick", "dicks")
-
-    return render_template('newCommentForm.html')
+    data = request.form
+    create_comment(data['name'], data['message'])
+    return "Post Created!"
 
 
 def create_comment(author, content):
