@@ -11,6 +11,8 @@ from sqlite3 import Error
 def start_comments():
     # TODO Load comments once feature is added
     comments = get_comments()
+    # Reverses the Array to make it chronologically accurate
+    comments = reversed(comments)
     return render_template('comments.html', comments=comments)
 
 
@@ -100,7 +102,8 @@ class Comment:
     def set_time_stamp(time_stamp):
         if time_stamp is None:
             # creates time stamp of creation of the comment
-            time = datetime.datetime.now().isoformat()
+            time = datetime.datetime.now().strftime("%m/%d/%y - %H:%M")
+
             return time
         else:
             return time_stamp

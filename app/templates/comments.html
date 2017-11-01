@@ -4,6 +4,10 @@
         body {
             background-color: #b6c5e3;
         }
+
+        .card {
+            margin: 1em 0 1em 0;
+        }
     </style>
     <h2><strong>BULLET</strong>IN</h2>
     <h5>~ Shoot off random messages with ease ~</h5>
@@ -43,11 +47,14 @@
         </div>
     </div>
     {% for comment in comments %}
-        <div class="card" style="width: 30rem;">
+        <div class="card col-sm-12 col-md-5 col-lg-4">
             <div class="card-block">
                 <div class="card-body">
-                    <p class="card-text">"{{ comment.content }}"</p>
-                    <p class="card-text"><strong>@{{ comment.author }}</strong></p>
+                    <p class="card-text" style="text-align: center;">"{{ comment.content }}"</p>
+                    <div class="row">
+                        <p class="card-text col-6 col-sm-6 col-md-6"><strong>@{{ comment.author }}</strong></p>
+                        <p class="card-text col-6 col-sm-6 col-md-6"><i style="float: right">{{ comment.time_stamp }}</i></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,8 +76,9 @@
                     //alert("Data: " + data + "\nStatus: " + status);
                     // Closes the Modal
                     $("#close").click();
+                    location.reload();
                 });
         });
     </script>
-    <p><i>Version: 1.0.0a</i></p>
+    <p><i>Version: 1.0.2a</i></p>
 {% endblock %}
