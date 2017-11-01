@@ -2,3 +2,12 @@
 config.py
 
 .idea/workspace.xml
+
+*.pyc
+
+
+*.pyc
+
+*.db-journal
+
+*.db

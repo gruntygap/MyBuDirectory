@@ -1,4 +1,4 @@
-class Person():
+class Person:
 
     def __init__(self, name, email, photo_link, po_num, place):
         self.name = name

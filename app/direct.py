@@ -4,7 +4,6 @@ from app import app
 from cookie import create_cookies
 from bs4 import BeautifulSoup
 from Person import *
-import string
 
 
 @app.route('/direct')
