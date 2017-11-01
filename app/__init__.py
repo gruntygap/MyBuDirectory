@@ -7,6 +7,7 @@ from direct import direct
 from app import comment
 from app import help
 from app import login
+from app import user
 
 
 @app.route('/')
