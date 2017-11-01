@@ -31,13 +31,12 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
                     <button type="button" class="btn btn-primary" id="posted">Post</button>
                 </div>
             </div>
         </div>
     </div>
-    {#    <a class="btn btn-dark" href="/comments/new">New Comment</a>#}
     {% for foo in comments %}
         <p>{{ foo.content }}</p>
     {% endfor %}
@@ -54,7 +53,9 @@
                     message: thing2
                 },
                 function (data, status) {
-                    alert("Data: " + data + "\nStatus: " + status);
+                    //alert("Data: " + data + "\nStatus: " + status);
+                    // Closes the Modal
+                    $("#close").click();
                 });
         });
     </script>

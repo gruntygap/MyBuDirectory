@@ -48,13 +48,19 @@ def upload_comment(comment):
 
 @app.route('/comments/delete/<identifier>')
 def delete_comment(identifier):
-    conn = sqlite3.connect(config.database_path)
-    try:
-        conn.cursor().execute("DELETE FROM comments WHERE id=?", (identifier,))
+    if identifier == "all":
+        conn = sqlite3.connect(config.database_path)
+        conn.cursor().execute("DELETE FROM comments;")
         conn.commit()
-        return "Deleted: %s" % identifier
-    except Error as e:
-        return "Could not delete %s" % e
+        return "The Records have been Purged"
+    else:
+        conn = sqlite3.connect(config.database_path)
+        try:
+            conn.cursor().execute("DELETE FROM comments WHERE id=?", (identifier,))
+            conn.commit()
+            return "Deleted: %s" % identifier
+        except Error as e:
+            return "Could not delete %s" % e
 
 
 def get_comments():
