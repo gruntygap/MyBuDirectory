@@ -2,52 +2,31 @@
 {% block content %}
     <h2><strong>BULLET</strong>IN</h2>
     <h5>~ Shoot off random messages with ease ~</h5>
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#newPostModal" data-whatever="Shoot">
-        New Post
+
+    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#newPostModal">
+        New Bullet
     </button>
 
-    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="newPostModal">
+    <div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">New Bullet</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-4">.col-md-4</div>
-                        <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
-                        <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-9">
-                            Level 1: .col-sm-9
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-6">
-                                    Level 2: .col-xs-8 .col-sm-6
-                                </div>
-                                <div class="col-xs-4 col-sm-6">
-                                    Level 2: .col-xs-4 .col-sm-6
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    ...
                 </div>
                 <div class="modal-footer">
+                    <span class="form-control-static pull-left">Example vertically aligned text</span>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
+            </div>
+        </div>
+    </div>
     {#    <a class="btn btn-dark" href="/comments/new">New Comment</a>#}
     {% for foo in comments %}
         <p>{{ foo.identifier }}</p>
