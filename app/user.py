@@ -12,13 +12,14 @@ def new_user():
     data = request.form
     try:
         # Tests the UserName
-        check_user(data['username'])
+        success = check_user(data['username'])
         # If the program makes it here, the username is unique: Continue making a user
         create_user(data['username'], data['email'], data['pass'])
     except ValueError, e:
         print e
+        success = e
         # TODO return duplicate user error to the HTMl
-    return "Good!"
+    return success
 
 
 # Checks if username is available
@@ -27,13 +28,17 @@ def check_user(username):
     c = conn.cursor()
     c.execute('''
 SELECT
-    username
+	username
 FROM
-    users
-HAVING 
-    COUNT(*) > 1
-    ''')
-    raise ValueError("The username already exists")
+	users
+WHERE 
+	username = "%s";
+    ''' % username)
+
+    if c.fetchone() is None:
+        return "Username is Available!"
+    else:
+        raise ValueError("The username already exists")
 
 
 def create_user(username, email, password):
@@ -59,7 +64,7 @@ def upload_user(user):
                              (id TEXT, username TEXT, email TEXT, password TEXT, status TEXT, creation_time_stamp TEXT, last_time_stamp TEXT)''')
     except Error:
         # Do nothing in particular
-        print "Will not re-create"
+        print "Table Already Exists"
 
     data = [(user.identifier, user.username, user.email, user.password, user.status, user.day_created, user.last_visit)]
     # Insert a row of data
