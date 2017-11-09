@@ -26,15 +26,7 @@ def new_user():
 def check_user(username):
     conn = sqlite3.connect(config.database_path)
     c = conn.cursor()
-    c.execute('''
-SELECT
-	username
-FROM
-	users
-WHERE 
-	username = "%s";
-    ''' % username)
-
+    c.execute('''SELECT username FROM users WHERE username = "%s";''' % username)
     if c.fetchone() is None:
         return "Username is Available!"
     else:
@@ -44,12 +36,6 @@ WHERE
 def create_user(username, email, password):
     new_person = User(username, email, password)
     upload_user(new_person)
-    # print new_person.username
-    # print new_person.email
-    # print new_person.password
-    # print new_person.identifier
-    # print new_person.day_created
-    # print new_person.last_visit
 
 
 # Handles Creation of the SQL as well as insertion
@@ -66,7 +52,7 @@ def upload_user(user):
         # Do nothing in particular
         print "Table Already Exists"
 
-    data = [(user.identifier, user.username, user.email, user.password, user.status, user.day_created, user.last_visit)]
+    data = [(user.identifier, user.username, user.email.lower(), user.password, user.status, user.day_created, user.last_visit)]
     # Insert a row of data
     c.executemany("INSERT INTO users VALUES (?,?,?,?,?,?,?)", data)
     # Saves
