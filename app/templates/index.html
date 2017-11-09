@@ -1,11 +1,21 @@
 {% extends "base.html" %}
-{% block content %}
-    <div class="jumbotron" style="background: linear-gradient(to right, #00b4ff , #353b41); color: aliceblue;">
-        <h1>Welcome to MyBu!</h1>
-        <p><i>[mahy-boo]</i></p>
-        <p>A Beta Site meant to try and connect Bethel Students</p>
-        <p><a class="btn btn-dark btn-lg" href="/connect" role="button">Go!</a></p>
+{% block banner %}
+    <style>
+        .jumbotron {
+            margin-bottom: 1rem;
+        }
+    </style>
+    <div class="jumbotron jumbotron-fluid"
+         style="background: linear-gradient(to right, #00b4ff , #353b41); color: aliceblue;">
+        <div class="container">
+            <h1>Welcome to MyBu!</h1>
+            <p><i>[mahy-boo]</i></p>
+            <p>A Beta Site meant to try and connect Bethel Students</p>
+            <p><a class="btn btn-dark btn-lg" href="/connect" role="button">Go!</a></p>
+        </div>
     </div>
+{% endblock %}
+{% block content %}
     <div class="card">
         <div class="card-body">
             <p><b>11/01/17</b></p>

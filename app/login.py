@@ -1,4 +1,4 @@
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect, url_for
 from app import app
 from app import user
 import config
@@ -8,13 +8,18 @@ import sqlite3
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
-        return render_template('login.html')
+        if "username" in session:
+            return "You are logged in as %s, please logout before trying to login again." % session["username"]
+        else:
+            return render_template('login.html')
     if request.method == 'POST':
         data = request.form
         print start_session(data)
         if 'username' in session:
-            return "Logged in as %s" % session['username']
-        return render_template('index.html', )
+            # Logs in & Directs to HomePage
+            return redirect(url_for("hello_world"))
+        else:
+            return render_template('login.html', success=False)
 
 
 def start_session(data):
@@ -42,5 +47,5 @@ def logout():
     session.pop('id', None)
     session.pop('username', None)
     session.pop('status', None)
-    # TODO Create Logout Page
-    return "Logged Out"
+    # TODO Create Logout Page (If not happy with below method)
+    return redirect(url_for("hello_world"))
