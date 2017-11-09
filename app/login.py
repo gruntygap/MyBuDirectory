@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, session
 from app import app
 from app import user
 import config
@@ -13,7 +13,9 @@ def login():
         print data['email']
         print data['password']
         print start_session(data)
-        return render_template('index.html')
+        if 'username' in session:
+            return "Logged in as %s" % session['username']
+        return render_template('index.html', )
 
 
 def start_session(data):
@@ -31,9 +33,16 @@ def start_session(data):
         return "Email or Password was Entered right boi"
 
 
-def set_session(user):
-    pass
+def set_session(user_name):
+    session['id'] = user_name.identifier
+    session['username'] = user_name.username
+    session['status'] = user_name.status
 
 
+@app.route('/logout', methods=['GET'])
 def logout():
-    pass
+    session.pop('id', None)
+    session.pop('username', None)
+    session.pop('status', None)
+    # TODO Create Logout Page
+    return "Logged Out"

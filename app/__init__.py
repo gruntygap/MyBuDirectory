@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-
+import config
 
 app = Flask(__name__)
 from app import cookie
@@ -9,6 +9,7 @@ from app import help
 from app import login
 from app import user
 
+app.secret_key = config.secret
 
 @app.route('/')
 def hello_world():
