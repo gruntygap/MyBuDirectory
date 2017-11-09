@@ -4,14 +4,13 @@ from app import user
 import config
 import sqlite3
 
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
     if request.method == 'POST':
         data = request.form
-        print data['email']
-        print data['password']
         print start_session(data)
         if 'username' in session:
             return "Logged in as %s" % session['username']
@@ -30,7 +29,6 @@ def start_session(data):
     else:
         grabbed_user = user.User(user_data[1], user_data[2], user_data[3], user_data[4], user_data[0], user_data[5])
         set_session(grabbed_user)
-        return "Email or Password was Entered right boi"
 
 
 def set_session(user_name):
