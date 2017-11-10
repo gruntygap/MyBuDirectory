@@ -55,8 +55,8 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         User Actions
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">{{ session["username"] }}'s Profile</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/user/profile">{{ session["username"] }}'s Profile</a>
                         {% if session["status"] == "admin" %}
                             <a class="dropdown-item" href="/admin">Admin Menu</a>
                         {% endif %}

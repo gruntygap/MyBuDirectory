@@ -1,9 +1,10 @@
-from flask import render_template, request
+from flask import render_template, request, session, redirect, url_for
 from app import app
 import config
 import datetime
 import uuid
 import sqlite3
+from exceptions import ValueError
 from sqlite3 import Error
 
 
@@ -12,14 +13,15 @@ def new_user():
     data = request.form
     try:
         # Tests the UserName
-        success = check_user(data['username'])
+        success = check_user(data['newUsername']), " created User"
         # If the program makes it here, the username is unique: Continue making a user
-        create_user(data['username'], data['email'], data['pass'])
-    except ValueError, e:
-        print e
-        success = e
+        create_user(data['newUsername'], data['newEmail'], data['newPassword'])
+    except ValueError:
+        success = "The username already exists, did not create User"
         # TODO return duplicate user error to the HTMl
-    return success
+    # return success
+    session['success'] = success
+    return redirect(url_for('login'))
 
 
 # Checks if username is available
@@ -30,7 +32,7 @@ def check_user(username):
     if c.fetchone() is None:
         return "Username is Available!"
     else:
-        raise ValueError("The username already exists")
+        raise ValueError()
 
 
 def create_user(username, email, password):
@@ -52,7 +54,8 @@ def upload_user(user):
         # Do nothing in particular
         print "Table Already Exists"
 
-    data = [(user.identifier, user.username, user.email.lower(), user.password, user.status, user.day_created, user.last_visit)]
+    data = [(user.identifier, user.username, user.email.lower(), user.password, user.status, user.day_created,
+             user.last_visit)]
     # Insert a row of data
     c.executemany("INSERT INTO users VALUES (?,?,?,?,?,?,?)", data)
     # Saves
@@ -65,6 +68,14 @@ def delete_user():
 
 def activate_user():
     pass
+
+
+@app.route('/user/profile')
+def user_profile():
+    if "username" in session:
+        return render_template('profile.html')
+    else:
+        return "This is all just a dream, return from whence you came."
 
 
 class User:

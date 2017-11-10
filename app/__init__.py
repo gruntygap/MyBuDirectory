@@ -11,6 +11,7 @@ from app import user
 
 app.secret_key = config.secret
 
+
 @app.route('/')
 def hello_world():
     return render_template('index.html')

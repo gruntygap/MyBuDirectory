@@ -8,6 +8,10 @@ import sqlite3
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
+        if "success" in session:
+            success = session['success']
+            session.pop('success', None)
+            return render_template('login.html', created=success)
         if "username" in session:
             return "You are logged in as %s, please logout before trying to login again." % session["username"]
         else:
@@ -25,8 +29,7 @@ def login():
 def start_session(data):
     conn = sqlite3.connect(config.database_path)
     c = conn.cursor()
-    c.execute('''SELECT * FROM users
-                  WHERE users.email = "%s"
+    c.execute('''SELECT * FROM users WHERE users.email = "%s" 
                   AND users.password = "%s"''' % (data['email'].lower(), data['password']))
     user_data = c.fetchone()
     if user_data is None:
