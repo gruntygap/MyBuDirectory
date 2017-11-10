@@ -14,7 +14,7 @@ def login():
             return render_template('login.html')
     if request.method == 'POST':
         data = request.form
-        print start_session(data)
+        start_session(data)
         if 'username' in session:
             # Logs in & Directs to HomePage
             return redirect(url_for("hello_world"))
