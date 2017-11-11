@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{% block banner %}
+    <style>
+        .jumbotron {
+            margin-bottom: 1rem;
+        }
+    </style>
+    <div class="jumbotron jumbotron-fluid"
+         style="background: linear-gradient(to right, #00b4ff , #353b41); color: aliceblue;">
+        <div class="container">
+            <h1>Welcome to MyBu!</h1>
+            <p><i>[mahy-boo]</i></p>
+            <p>A Beta Site meant to try and connect Bethel Students</p>
+            <p><a class="btn btn-dark btn-lg" href="/comments" role="button">Go!</a></p>
+        </div>
+    </div>
+{% endblock %}
 {% block content %}
-    <h1>Welcome to MyBu!</h1>
-    <p><i>[mahy-boo]</i></p>
     <div class="card">
         <div class="card-body">
             <p><b>11/01/17</b></p>
@@ -12,7 +26,8 @@
                 "new post", then proceed to enter your name that you want to be referenced as, then enter whatever the
                 frick you want! Eventually I plan to move this towards a user system, as well as including richer
                 content. (if someone enters a link, it will pull up a picture etc.) For now this is what you get.
-                Remember to make suggestions, or report bugs within this new feature! <strong>You can report comments on the help tab</strong>
+                Remember to make suggestions, or report bugs within this new feature! <strong>You can report comments on
+                the help tab</strong>
             </p>
             <p>
                 Thanksgiving Lit, GG

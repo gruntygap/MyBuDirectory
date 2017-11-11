@@ -23,42 +23,62 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="/">MYBU</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbarToggle"
+            aria-controls="mainNavbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<div id="page-content-wrapper">
-    <div class="car"></div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        <a class="navbar-brand" href="/">MYBU</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbarToggle"
-                aria-controls="mainNavbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="mainNavbarToggle">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+    <div class="collapse navbar-collapse" id="mainNavbarToggle">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/get-cookies-view">Cookies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/direct">Direct</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/comments">Comments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/help">Help</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% if session["username"] is defined %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User Actions
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <p class="dropdown-header">Signed in as <strong>{{ session["username"] }}</strong>
+                        </p>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/profile">Your Profile</a>
+                        {% if session["status"] == "admin" %}
+                            <a class="dropdown-item" href="/user/admin">Admin Menu</a>
+                        {% endif %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/get-cookies-view">Cookies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/direct">Direct</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/comments">Comments</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/help">Help</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
-
-            </ul>
-        </div>
-    </nav>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% block banner %}
+    <!-- Where the banner of the templates go -->
+{% endblock %}
+<div id="page-content-wrapper">
     <div class="container-fluid">
         <div class="alert alert-info alert-dismissible fade show" role="alert"
              style="text-align: center; margin: 1rem 0 1rem 0;">

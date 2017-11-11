@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Profile Menu</h2>
+    <p>Users are still being worked on</p>
+    <p>All we know right now is you are: <b>{{ session['username'] }}</b></p>
+    <p>Your id is: {{ session['id'] }}</p>
+    <p>Your status as a user is: {{ session['status'] }}</p>
+    <p><i>Want admin? Request it in the help page</i></p>
+{% endblock %}
