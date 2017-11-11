@@ -31,7 +31,11 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">@</div>
-                                <input type="text" class="form-control" id="shortName" placeholder="Name">
+                                {% if session["username"] is defined %}
+                                    <input type="text" class="form-control" id="shortName" placeholder="Anon-..." value="{{ session['username'] }}" disabled>
+                                {% else %}
+                                    <input type="text" class="form-control" id="shortName" placeholder="Anon-..." value="anon-">
+                                {% endif %}
                             </div>
                         </div>
                         <div class="form-group">
