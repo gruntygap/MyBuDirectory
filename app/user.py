@@ -105,10 +105,11 @@ def user_profile():
 
 @app.route('/user/admin')
 def admin_menu():
-    if session['status'] == "admin":
-        users = get_users()
-        comments = comment.get_comments()
-        return render_template('admin.html', users=users, comments=comments)
+    if 'status' in session:
+        if session['status'] == "admin":
+            users = get_users()
+            comments = comment.get_comments()
+            return render_template('admin.html', users=users, comments=comments)
     else:
         return "This is all just a dream, return from whence you came."
 
