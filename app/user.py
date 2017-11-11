@@ -11,6 +11,17 @@ from sqlite3 import Error
 
 @app.route('/user/new', methods=['POST'])
 def new_user():
+    # Adds new
+    conn = sqlite3.connect(config.database_path)
+    c = conn.cursor()
+
+    # Create table
+    try:
+        c.execute('''CREATE TABLE users
+                                 (id TEXT, username TEXT, email TEXT, password TEXT, status TEXT, creation_time_stamp TEXT, last_time_stamp TEXT)''')
+    except Error:
+        # Do nothing in particular
+        print "Table Already Exists"
     data = request.form
     try:
         # Tests the UserName
