@@ -15,11 +15,3 @@ app.secret_key = config.secret
 @app.route('/')
 def hello_world():
     return render_template('index.html')
-
-
-@app.route('/admin')
-def admin_menu():
-    if session['status'] == "admin":
-        return render_template('admin.html')
-    else:
-        return "This is all just a dream, return from whence you came."

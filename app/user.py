@@ -1,5 +1,6 @@
 from flask import render_template, request, session, redirect, url_for
 from app import app
+from app import comment
 import config
 import datetime
 import uuid
@@ -100,6 +101,27 @@ def user_profile():
         return render_template('profile.html')
     else:
         return "This is all just a dream, return from whence you came."
+
+
+@app.route('/user/admin')
+def admin_menu():
+    if session['status'] == "admin":
+        users = get_users()
+        comments = comment.get_comments()
+        return render_template('admin.html', users=users, comments=comments)
+    else:
+        return "This is all just a dream, return from whence you came."
+
+
+def get_users():
+    users = []
+    conn = sqlite3.connect(config.database_path)
+    c = conn.cursor()
+    c.execute("SELECT * FROM users")
+    results = c.fetchall()
+    for result in results:
+        users.append(User(result[1], result[2], result[3], result[4], result[0], result[6], result[5]))
+    return users
 
 
 class User:
