@@ -7,6 +7,7 @@
 
         .card {
             margin: 1em 0 1em 0;
+            padding: 0;
         }
     </style>
     <h2><strong>BULLET</strong>IN</h2>
@@ -51,11 +52,10 @@
             <div class="card-block">
                 <div class="card-body">
                     <p class="card-text" style="text-align: center;">"{{ comment.content }}"</p>
-                    <div class="row">
-                        <p class="card-text col-6 col-sm-6 col-md-6"><strong>@{{ comment.author }}</strong></p>
-                        <p class="card-text col-6 col-sm-6 col-md-6"><i style="float: right">{{ comment.time_stamp }}</i></p>
-                    </div>
                 </div>
+            </div>
+            <div class="card-footer text-muted">
+                <p><strong>@{{ comment.author }}</strong><i style="float: right">{{ comment.time_stamp }}</i></p>
             </div>
         </div>
     {% endfor %}

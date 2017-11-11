@@ -62,12 +62,36 @@ def upload_user(user):
     conn.commit()
 
 
-def delete_user():
-    pass
+@app.route('/user/delete')
+def delete_user(identifier):
+    conn = sqlite3.connect(config.database_path)
+    c = conn.cursor()
+    try:
+        c.execute('''DELETE FROM users WHERE id='%s';''' % identifier)
+    except Error:
+        print "Could not delete"
+    conn.commit()
 
 
-def activate_user():
-    pass
+@app.route('/user/admin/<username>/<password>')
+def admin_user(username, password):
+    if password == config.secret:
+        conn = sqlite3.connect(config.database_path)
+        c = conn.cursor()
+        # Create table
+        try:
+            c.execute('''UPDATE users SET status = 'admin' WHERE username = "%s";''' % username)
+        except Error:
+            print "Could not update"
+        conn.commit()
+        return "Greaaatttt!"
+    else:
+        return "Not correct Password"
+
+
+@app.route('/password/reset')
+def forgot_pass():
+    return "Well I guess you're screwed? Contact Admin with Help?"
 
 
 @app.route('/user/profile')
@@ -107,8 +131,8 @@ class User:
     @staticmethod
     def set_last_visit(last_visit):
         if last_visit is None:
-            time = datetime.datetime.now().strftime("%m/%d/%y - %H:%M")
-        return time
+            last_visit = datetime.datetime.now().strftime("%m/%d/%y - %H:%M")
+        return last_visit
 
     @staticmethod
     def set_identifier(identifier):
