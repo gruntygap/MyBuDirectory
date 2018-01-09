@@ -1,0 +1,22 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+flask = "*"
+mechanize = "*"
+requests = "*"
+"bs4" = "*"
+twill = "*"
+lxml = "*"
+cssselect = "*"
+datetime = "*"
+gunicorn = "*"
