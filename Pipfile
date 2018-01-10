@@ -21,4 +21,4 @@ cssselect = "*"
 DateTime = "*"
 
 [requires]
-python_version = "2.7.14"
+python_full_version = "2.7.14"
