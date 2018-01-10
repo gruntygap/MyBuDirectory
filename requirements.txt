@@ -6,3 +6,4 @@ twill
 lxml
 cssselect
 datetime
+gunicorn
