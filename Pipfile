@@ -1,0 +1,24 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+Flask = "*"
+mechanize = "*"
+requests = "*"
+"bs4" = "*"
+twill = "*"
+lxml = "*"
+cssselect = "*"
+DateTime = "*"
+
+[requires]
+python_version = "2.7.14"
