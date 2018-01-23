@@ -33,7 +33,7 @@ def upload_comment(comment):
     # Adds new
     # conn = sqlite3.connect(config.database_path)
     # c = conn.cursor()
-    db = Postgres(config.database_path)
+    db = Postgres(os.environ['DATABASE_URL'])
     # Create table
     # try:
     #     c.execute('''CREATE TABLE comments
@@ -71,7 +71,7 @@ def delete_comment(identifier):
 def get_comments():
     comments = []
     results = []
-    db = Postgres(config.database_path)
+    db = Postgres(os.environ['DATABASE_URL'])
     # conn = sqlite3.connect(db)
     # c = conn.cursor()
     try:
