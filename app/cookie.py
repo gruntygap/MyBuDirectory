@@ -15,8 +15,12 @@ def create_cookies():
     browser.set_cookiejar(jar)
     browser.open('https://auth.bethel.edu/cas/login')
     browser.select_form(nr=0)  # check yoursite forms to match the correct number
-    browser['username'] = user  # use the proper input type=text name
-    browser['password'] = password  # use the proper input type=password name
+    if testing is True:
+        browser['username'] = user  # use the proper input type=text name
+        browser['password'] = password  # use the proper input type=password name
+    else:
+        browser['username'] = os.environ['user']  # use the proper input type=text name
+        browser['password'] = os.environ['password']  # use the proper input type=password name
     browser.submit()
     return jar
 
