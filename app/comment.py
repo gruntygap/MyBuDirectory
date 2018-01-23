@@ -6,6 +6,7 @@ import uuid
 import sqlite3
 from sqlite3 import Error
 from postgres import Postgres
+import os
 
 
 @app.route('/comments')
