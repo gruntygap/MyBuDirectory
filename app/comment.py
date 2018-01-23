@@ -5,6 +5,7 @@ import datetime
 import uuid
 import sqlite3
 from sqlite3 import Error
+from postgres import Postgres
 
 
 @app.route('/comments')
@@ -30,22 +31,24 @@ def create_comment(author, content):
 
 def upload_comment(comment):
     # Adds new
-    conn = sqlite3.connect(config.database_path)
-    c = conn.cursor()
-
+    # conn = sqlite3.connect(config.database_path)
+    # c = conn.cursor()
+    db = Postgres(config.database_path)
     # Create table
-    try:
-        c.execute('''CREATE TABLE comments
-                         (id TEXT, author TEXT, content TEXT, time_stamp TEXT)''')
-    except Error:
-        # Do nothing in particular
-        print "Will not re-create"
+    # try:
+    #     c.execute('''CREATE TABLE comments
+    #                      (id TEXT, author TEXT, content TEXT, time_stamp TEXT)''')
+    # except Error:
+    #     # Do nothing in particular
+    #     print "Will not re-create"
 
     data = [(comment.identifier, comment.author, comment.content, comment.time_stamp)]
     # Insert a row of data
-    c.executemany("INSERT INTO comments VALUES (?,?,?,?)", data)
+    stu = "INSERT INTO comments VALUES ('%s','%s','%s','%s')" % (comment.identifier, comment.author, comment.content, comment.time_stamp)
+    db.run(stu)
+    # c.executemany("INSERT INTO comments VALUES (?,?,?,?)", data)
     # Saves
-    conn.commit()
+    # conn.commit()
 
 
 @app.route('/comments/delete/<identifier>')
@@ -68,11 +71,13 @@ def delete_comment(identifier):
 def get_comments():
     comments = []
     results = []
-    conn = sqlite3.connect(config.database_path)
-    c = conn.cursor()
+    db = Postgres(config.database_path)
+    # conn = sqlite3.connect(db)
+    # c = conn.cursor()
     try:
-        c.execute("SELECT * FROM comments")
-        results = c.fetchall()
+        results = db.all("SELECT * FROM comments")
+        # c.execute("SELECT * FROM comments")
+        # results = c.fetchall()
 
     except Error as e:
         print "Error: %s" % e

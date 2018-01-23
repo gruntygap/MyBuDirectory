@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Amazon Redshift - dcm0vtgdemg46a@ec2-54-235-73-241.compute-1.amazonaws.com" uuid="348861c9-f968-4f5d-a216-40ec253119c2">
+      <driver-ref>redshift</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.amazon.redshift.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:redshift://ec2-54-235-73-241.compute-1.amazonaws.com:5432/dcm0vtgdemg46a?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory</jdbc-url>
+    </data-source>
+  </component>
+</project>
