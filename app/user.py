@@ -91,6 +91,7 @@ def delete_user(identifier):
 
 @app.route('/user/admin/<username>/<password>')
 def admin_user(username, password):
+    # TODO FIX
     if password == config.secret:
         conn = get_db()
         c = conn.cursor()
