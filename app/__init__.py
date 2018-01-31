@@ -9,7 +9,7 @@ from app import help
 from app import login
 from app import user
 
-app.secret_key = config.secret
+app.secret_key = "secret"
 
 
 @app.route('/')
