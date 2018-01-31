@@ -125,3 +125,6 @@ class Comment:
             return identifier
         else:
             return identifier
+# TODO add a reply object, that is nearly identical to a comment, with an added
+# paramerter, which is parent. Then create methods to get the replies. All replies must branch from a Comment or another reply.
+# Create an sql table that will allow the loading and saving of these "replies"
