@@ -7,6 +7,18 @@ import uuid
 import sqlite3
 from exceptions import ValueError
 from sqlite3 import Error
+import psycopg2
+import os
+
+
+def get_db():
+    if config.testing:
+        db = psycopg2.connect(config.database_path)
+
+    else:
+        db = psycopg2.connect(os.environ['DATABASE_URL'])
+
+    return db
 
 
 @app.route('/user/new', methods=['POST'])
@@ -28,7 +40,7 @@ def new_user():
 
 # Checks if username is available
 def check_user(username):
-    conn = sqlite3.connect(config.database_path)
+    conn = get_db()
     c = conn.cursor()
     c.execute('''SELECT username FROM users WHERE username = "%s";''' % username)
     if c.fetchone() is None:
@@ -45,7 +57,7 @@ def create_user(username, email, password):
 # Handles Creation of the SQL as well as insertion
 def upload_user(user):
     # Adds new
-    conn = sqlite3.connect(config.database_path)
+    conn = get_db()
     c = conn.cursor()
 
     # Create table
@@ -66,7 +78,7 @@ def upload_user(user):
 
 @app.route('/user/delete')
 def delete_user(identifier):
-    conn = sqlite3.connect(config.database_path)
+    conn = get_db()
     c = conn.cursor()
     try:
         c.execute('''DELETE FROM users WHERE id='%s';''' % identifier)
@@ -78,7 +90,7 @@ def delete_user(identifier):
 @app.route('/user/admin/<username>/<password>')
 def admin_user(username, password):
     if password == config.secret:
-        conn = sqlite3.connect(config.database_path)
+        conn = get_db()
         c = conn.cursor()
         # Create table
         try:
@@ -117,7 +129,7 @@ def admin_menu():
 
 def get_users():
     users = []
-    conn = sqlite3.connect(config.database_path)
+    conn = get_db()
     c = conn.cursor()
     c.execute("SELECT * FROM users")
     results = c.fetchall()

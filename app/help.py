@@ -1,6 +1,8 @@
 from flask import render_template, request
 from app import app
 import smtplib
+import os
+import config
 
 
 @app.route('/help', methods=['GET', 'POST'])
@@ -33,11 +35,12 @@ def handle():
         "",
         message
     ])
-    username = 'n3onsnak3@gmail.com'
-    password = 'Technology'
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.starttls()
-    server.login(username, password)
+    if config.testing:
+        server.login(config.email_user, config.password)
+    else:
+        server.login(os.environ['email_user'], os.environ['password'])
     server.sendmail(fromaddr, toaddrs, msg)
     server.quit()
     return True

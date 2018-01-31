@@ -3,19 +3,31 @@ from app import app
 import config
 import datetime
 import uuid
-import sqlite3
 from sqlite3 import Error
-from postgres import Postgres
+import psycopg2
 import os
+# for emoji support
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 @app.route('/comments')
 def start_comments():
-    # TODO Load comments once feature is added
     comments = get_comments()
     # Reverses the Array to make it chronologically accurate
     comments = reversed(comments)
     return render_template('comments.html', comments=comments)
+
+
+def get_db():
+    if config.testing:
+        db = psycopg2.connect(config.database_path)
+
+    else:
+        db = psycopg2.connect(os.environ['DATABASE_URL'])
+
+    return db
 
 
 @app.route('/comments/new', methods=['POST'])
@@ -32,38 +44,34 @@ def create_comment(author, content):
 
 def upload_comment(comment):
     # Adds new
-    # conn = sqlite3.connect(config.database_path)
-    # c = conn.cursor()
-    db = Postgres(os.environ['DATABASE_URL'])
-    # Create table
-    # try:
-    #     c.execute('''CREATE TABLE comments
-    #                      (id TEXT, author TEXT, content TEXT, time_stamp TEXT)''')
-    # except Error:
-    #     # Do nothing in particular
-    #     print "Will not re-create"
+    conn = get_db()
+    cur = conn.cursor()
 
-    data = [(comment.identifier, comment.author, comment.content, comment.time_stamp)]
+    # TODO Add support for ' and "
     # Insert a row of data
-    stu = "INSERT INTO comments VALUES ('%s','%s','%s','%s')" % (comment.identifier, comment.author, comment.content, comment.time_stamp)
-    db.run(stu)
-    # c.executemany("INSERT INTO comments VALUES (?,?,?,?)", data)
-    # Saves
-    # conn.commit()
+    sql = "INSERT INTO comments VALUES ('%s','%s','%s','%s')" % (comment.identifier, comment.author, comment.content, comment.time_stamp)
+    cur.execute(sql)
+    conn.commit()
+    cur.close()
+    conn.close()
 
 
 @app.route('/comments/delete/<identifier>')
 def delete_comment(identifier):
+    conn = get_db()
+    cur = conn.cursor()
     if identifier == "all":
-        conn = sqlite3.connect(config.database_path)
-        conn.cursor().execute("DELETE FROM comments;")
+        cur.execute("DELETE FROM comments;")
         conn.commit()
+        cur.close()
+        conn.close()
         return "The Records have been Purged"
     else:
-        conn = sqlite3.connect(config.database_path)
         try:
-            conn.cursor().execute("DELETE FROM comments WHERE id=?", (identifier,))
+            cur.execute("DELETE FROM comments WHERE id=?", (identifier,))
             conn.commit()
+            cur.close()
+            conn.close()
             return "Deleted: %s" % identifier
         except Error as e:
             return "Could not delete %s" % e
@@ -72,13 +80,11 @@ def delete_comment(identifier):
 def get_comments():
     comments = []
     results = []
-    db = Postgres(os.environ['DATABASE_URL'])
-    # conn = sqlite3.connect(db)
-    # c = conn.cursor()
+    conn = get_db()
+    cur = conn.cursor()
     try:
-        results = db.all("SELECT * FROM comments")
-        # c.execute("SELECT * FROM comments")
-        # results = c.fetchall()
+        cur.execute("SELECT * FROM comments")
+        results = cur.fetchall()
 
     except Error as e:
         print "Error: %s" % e

@@ -4,6 +4,19 @@ from app import user
 import config
 import sqlite3
 from sqlite3 import Error
+import psycopg2
+import os
+
+
+def get_db():
+    if config.testing:
+        db = psycopg2.connect(config.database_path)
+
+    else:
+        db = psycopg2.connect(os.environ['DATABASE_URL'])
+
+    return db
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -30,17 +43,16 @@ def login():
 
 
 def start_session(data):
-    conn = sqlite3.connect(config.database_path)
+    conn = get_db()
     c = conn.cursor()
-    c.execute('''SELECT * FROM users WHERE users.email = "%s" 
-                  AND users.password = "%s"''' % (data['email'].lower(), data['password']))
+    c.execute("""SELECT * FROM users WHERE email = '%s' AND password = '%s';""" % (data['email'].lower(), data['password']))
     user_data = c.fetchone()
     if user_data is None:
         return "Email or Password was Entered incorrectly"
     else:
         grabbed_user = user.User(user_data[1], user_data[2], user_data[3], user_data[4], user_data[0], user_data[5])
         try:
-            c.execute('''UPDATE users SET last_time_stamp = '%s' WHERE username = "%s";''' % (grabbed_user.last_visit, grabbed_user.username))
+            c.execute('''UPDATE users SET last_time_stamp = '%s' WHERE username = '%s';''' % (grabbed_user.last_visit, grabbed_user.username))
             conn.commit()
         except Error:
             print "Could not update last visit timestamp"

@@ -1,4 +1,5 @@
 user = ''
+email_user = '
 password = ''
 database_path = ''
 secret = ''
