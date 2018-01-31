@@ -42,7 +42,7 @@ def new_user():
 def check_user(username):
     conn = get_db()
     c = conn.cursor()
-    c.execute('''SELECT username FROM users WHERE username = "%s";''' % username)
+    c.execute('''SELECT username FROM users WHERE username = '%s';''' % username)
     if c.fetchone() is None:
         return "Username is Available!"
     else:
@@ -61,17 +61,19 @@ def upload_user(user):
     c = conn.cursor()
 
     # Create table
-    try:
-        c.execute('''CREATE TABLE users
-                             (id TEXT, username TEXT, email TEXT, password TEXT, status TEXT, creation_time_stamp TEXT, last_time_stamp TEXT)''')
-    except Error:
-        # Do nothing in particular
-        print "Table Already Exists"
+    # try:
+    #     c.execute('''CREATE TABLE users
+    #                          (id TEXT, username TEXT, email TEXT, password TEXT, status TEXT, creation_time_stamp TEXT, last_time_stamp TEXT)''')
+    # except Error:
+    #     # Do nothing in particular
+    #     print "Table Already Exists"
 
     data = [(user.identifier, user.username, user.email.lower(), user.password, user.status, user.day_created,
              user.last_visit)]
     # Insert a row of data
-    c.executemany("INSERT INTO users VALUES (?,?,?,?,?,?,?)", data)
+    c.execute("""INSERT INTO users VALUES ('%s','%s','%s','%s','%s','%s','%s')""" % (user.identifier, user.username, user.email.lower(), user.password, user.status, user.day_created,
+             user.last_visit))
+    # c.executemany("INSERT INTO users VALUES (?,?,?,?,?,?,?)", data)
     # Saves
     conn.commit()
 
